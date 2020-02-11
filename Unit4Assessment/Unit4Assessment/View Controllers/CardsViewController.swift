@@ -34,7 +34,7 @@ class CardsViewController: UIViewController {
         cardsView.collectionView.dataSource = self
         
         //register cell here
-        cardsView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardsCell")
+        cardsView.collectionView.register(FlashcardCell.self, forCellWithReuseIdentifier: "cardsCell")
     }
     
     private func loadFavorites() {
@@ -69,18 +69,28 @@ extension CardsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardsCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardsCell", for: indexPath) as? FlashcardCell else {
+            fatalError("could not downcast to CardCell")
+        }
         
         cell.backgroundColor = .blue
         
+        let selectedItem = cards[indexPath.row]
+        
+        cell.configureCell(for: selectedItem)
+        cell.state = CellState.cardsVC
         return cell
     }
     
+    
 }
 
-extension CardsViewController: CardCellDelegate {
-    func didEdit(_ cardCell: CardCell, _ flashcard: CardsInfo) {
-        
+extension CardsViewController: CellDelegate {
+    func didFavorite(_ searchCell: FlashcardCell, _ card: CardsInfo) {
+        print("nbdsfbv")
+    }
+    
+    func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
             self.delete(card: flashcard)

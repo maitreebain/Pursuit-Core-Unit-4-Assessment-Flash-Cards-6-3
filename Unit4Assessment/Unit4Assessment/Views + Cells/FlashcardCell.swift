@@ -8,16 +8,21 @@
 
 import UIKit
 
-protocol SavedCardCellDelegate: AnyObject {
-    func didFavorite(_ searchCell: SearchCell, _ card: CardsInfo)
+public enum CellState{
+    case cardsVC
+    case searchVC
 }
 
-class SearchCell: UICollectionViewCell {
+protocol CellDelegate: AnyObject {
+    func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo )
+}
+
+class FlashcardCell: UICollectionViewCell {
     
     //needs button for saving
     public lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.setImage(UIImage(systemName: "ellipses.circle"), for: .normal)
         button.addTarget(self, action: #selector(favoritedCard(_:)), for: .touchUpInside)
         return button
     }()
@@ -42,8 +47,10 @@ class SearchCell: UICollectionViewCell {
         return gesture
     }()
     
+    var state = CellState.cardsVC
+    
     //MARK:// - Current card and state
-    public var delegate: SavedCardCellDelegate!
+    public var delegate: CellDelegate!
     private var currentCard: CardsInfo!
     private var isShowingDescript = false
     
@@ -64,6 +71,7 @@ class SearchCell: UICollectionViewCell {
         addGestureRecognizer(tapGesture)
     }
     
+    
     @objc private func didTap(_ gesture: UITapGestureRecognizer) {
 //        guard let currentCard = currentCard else { return }
         
@@ -76,24 +84,22 @@ class SearchCell: UICollectionViewCell {
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
-        //set delegate here
-        delegate.didFavorite(self, currentCard)
+        delegate.didEdit(self, currentCard)
     }
     
     private func animate() {
         let duration = 1.0
         
         if isShowingDescript {
-            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
-                self.questionLabel.alpha = 0.0
-                self.descriptionText.alpha = 1.0
-            }, completion: nil)
-        }else {
             UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
                 self.questionLabel.alpha = 1.0
                 self.descriptionText.alpha = 0.0
             }, completion: nil)
-
+        }else {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
+                self.descriptionText.alpha = 1.0
+                self.questionLabel.alpha = 0.0
+            }, completion: nil)
         }
     }
     
@@ -128,12 +134,16 @@ class SearchCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             descriptionText.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionText.leadingAnchor.constraint(equalTo: leadingAnchor),
-            descriptionText.trailingAnchor.constraint(equalTo: trailingAnchor)
+            descriptionText.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionText.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
         ])
     }
     
     public func configureCell(for card: CardsInfo) {
+        if state == CellState.searchVC {
+            favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
         questionLabel.text = card.cardTitle
-        descriptionText.text = card.facts.joined(separator: " ")
+        descriptionText.text = "\(card.facts.first ?? "") \(card.facts.last ?? "") "
     }
 }

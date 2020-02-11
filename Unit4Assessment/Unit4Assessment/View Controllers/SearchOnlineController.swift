@@ -10,8 +10,10 @@ import UIKit
 import DataPersistence
 
 class SearchOnlineController: UIViewController {
+    
     private let searchView = SearchOnlineView()
-    public var dataPersistence: DataPersistence<CardsInfo>!
+    
+    var dataPersistence: DataPersistence<CardsInfo>!
     
     override func loadView() {
         view = searchView
@@ -25,6 +27,8 @@ class SearchOnlineController: UIViewController {
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,17 +36,31 @@ class SearchOnlineController: UIViewController {
         view.backgroundColor = .blue
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
-        searchView.collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "searchCell")
+        searchView.collectionView.register(FlashcardCell.self, forCellWithReuseIdentifier: "cardsCell")
         loadData()
     }
     
     private func loadData() {
         do{
-        onlineCards = try CardsAPIClient.getCard()
+            onlineCards = try CardsAPIClient.getCard()
         } catch {
             print("no data found: \(error)")
         }
     }
+    
+}
+
+extension SearchOnlineController: CellDelegate {
+    func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
+        
+        do {
+            try dataPersistence.createItem(flashcard)
+        } catch {
+            print("could not save card as favorite")
+        }
+    }
+    
+    
     
 }
 
@@ -68,8 +86,8 @@ extension SearchOnlineController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as?
-            SearchCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardsCell", for: indexPath) as?
+            FlashcardCell else {
                 fatalError("could not downcast to SearchCell")
         }
         
@@ -77,13 +95,19 @@ extension SearchOnlineController: UICollectionViewDataSource {
         
         cell.backgroundColor = .white
         cell.configureCell(for: selectedCard)
+        cell.state = CellState.searchVC
         
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //do data persisting here
+        let card = onlineCards[indexPath.row]
+        
+        do {
+            try dataPersistence.createItem(card)
+        } catch {
+            print("could not save card as favorite")
+        }
     }
-    
-    
 }
