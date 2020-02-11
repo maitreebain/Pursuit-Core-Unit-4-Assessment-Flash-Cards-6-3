@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import DataPersistence
 
 class CardsViewController: UIViewController {
 
     private let cardsView = CardsView()
+    public var dataPersistence: DataPersistence<CardsInfo>!
     
     override func loadView() {
         view = cardsView
@@ -30,7 +32,7 @@ class CardsViewController: UIViewController {
         cardsView.collectionView.dataSource = self
         
         //register cell here
-        cardsView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cardsCell")
+        cardsView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardsCell")
     }
 }
 

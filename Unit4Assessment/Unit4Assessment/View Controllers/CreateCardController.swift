@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import DataPersistence
 
 class CreateCardController: UIViewController {
 
     private let createCardsView = CreateCardsView()
+    public var dataPersistence: DataPersistence<CardsInfo>!
+    
     
     override func loadView() {
         view = createCardsView
@@ -21,6 +24,8 @@ class CreateCardController: UIViewController {
 
         view.backgroundColor = .yellow
         //add bar button  items here
+        
+        //delegate for text field
     }
     
     //functions for button items here

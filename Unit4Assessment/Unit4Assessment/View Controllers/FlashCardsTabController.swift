@@ -15,15 +15,15 @@ class FlashCardsTabController: UITabBarController {
     
     private lazy var cardsController: CardsViewController = {
        let viewcontroller = CardsViewController()
-        //data persistence
         viewcontroller.tabBarItem = UITabBarItem(title: "Cards", image: UIImage(systemName: "rectangle.dock"), tag: 0)
+        viewcontroller.dataPersistence = dataPersistence
         return viewcontroller
     }()
     
     private lazy var createCardController: CreateCardController = {
        let viewcontroller = CreateCardController()
         viewcontroller.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "square.and.pencil"), tag: 1)
-        //data persistence
+        viewcontroller.dataPersistence = dataPersistence
         return viewcontroller
     }()
     
@@ -31,6 +31,7 @@ class FlashCardsTabController: UITabBarController {
        let viewcontroller = SearchOnlineController()
         //data persistence
         viewcontroller.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
+        viewcontroller.dataPersistence = dataPersistence
         return viewcontroller
     }()
 

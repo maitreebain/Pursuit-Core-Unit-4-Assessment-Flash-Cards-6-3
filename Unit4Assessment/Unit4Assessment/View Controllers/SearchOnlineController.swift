@@ -7,14 +7,23 @@
 //
 
 import UIKit
+import DataPersistence
 
 class SearchOnlineController: UIViewController {
+    
+    private let searchView = SearchOnlineView()
+    public var dataPersistence: DataPersistence<CardsInfo>!
+    
+    override func loadView() {
+        view = searchView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
         view.backgroundColor = .blue
+        
     }
     
 

@@ -1,5 +1,5 @@
 //
-//  CardCell.swift
+//  SearchCell.swift
 //  Unit4Assessment
 //
 //  Created by Maitree Bain on 2/11/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardCell: UICollectionViewCell {
+class SearchCell: UICollectionViewCell {
     
-    //needs a button for edit
+    //needs button for saving
 }
