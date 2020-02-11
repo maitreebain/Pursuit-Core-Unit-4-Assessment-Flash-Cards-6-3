@@ -11,7 +11,7 @@ import DataPersistence
 
 //make protocol here
 class SearchOnlineController: UIViewController {
-   //needs data persistence delegate on this vc
+    //needs data persistence delegate on this vc
     private let searchView = SearchOnlineView()
     public var dataPersistence: DataPersistence<CardsInfo>!
     
@@ -70,11 +70,18 @@ extension SearchOnlineController: UICollectionViewDelegateFlowLayout {
 
 extension SearchOnlineController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return onlineCards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as?
+            SearchCell else {
+                fatalError("could not downcast to SearchCell")
+        }
+        
+        let selectedCard = onlineCards[indexPath.row]
+        
+        cell.configureCell(for: selectedCard)
         
         cell.backgroundColor = .systemPink
         

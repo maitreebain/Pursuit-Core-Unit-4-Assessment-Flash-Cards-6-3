@@ -21,6 +21,8 @@ class SearchCell: UICollectionViewCell {
     public lazy var questionLabel: UILabel = {
         let label = UILabel()
         label.text = "Question: "
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -86,6 +88,20 @@ class SearchCell: UICollectionViewCell {
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
-
     
+    private func setUpDescriptionTextConstraints() {
+        addSubview(descriptionText)
+        
+        descriptionText.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            descriptionText.centerYAnchor.constraint(equalTo: centerYAnchor),
+            descriptionText.leadingAnchor.constraint(equalTo: leadingAnchor),
+            descriptionText.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
+
+    public func configureCell(for card: CardsInfo) {
+        questionLabel.text = card.cardTitle
+    }
 }
