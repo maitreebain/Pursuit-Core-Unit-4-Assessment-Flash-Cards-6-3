@@ -10,9 +10,11 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
     
+    //needs button for saving
     public lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.addTarget(self, action: #selector(favoritedCard(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -31,8 +33,13 @@ class SearchCell: UICollectionViewCell {
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
         //add gesture target here
+        gesture.addTarget(self, action: #selector(didTap(_:)))
         return gesture
     }()
+    
+    //MARK:// - Current card and state
+    private var currentCard: CardsInfo!
+    private var isShowingDescript = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,8 +53,16 @@ class SearchCell: UICollectionViewCell {
     
     private func commonInit() {
         setUpQuestionLabelConstraints()
+        setUpFavoriteButtonConstraints()
     }
-    //needs button for saving
+    
+    @objc private func didTap(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
+    @objc private func favoritedCard(_ sender: UIButton) {
+        
+    }
     
     private func setUpQuestionLabelConstraints() {
         addSubview(questionLabel)
@@ -60,4 +75,17 @@ class SearchCell: UICollectionViewCell {
             questionLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
+    
+    private func setUpFavoriteButtonConstraints() {
+        addSubview(favoriteButton)
+        
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            favoriteButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+
+    
 }

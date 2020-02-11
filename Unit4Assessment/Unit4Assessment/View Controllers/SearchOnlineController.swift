@@ -10,9 +10,8 @@ import UIKit
 import DataPersistence
 
 //make protocol here
-
 class SearchOnlineController: UIViewController {
-    
+   //needs data persistence delegate on this vc
     private let searchView = SearchOnlineView()
     public var dataPersistence: DataPersistence<CardsInfo>!
     
@@ -36,11 +35,19 @@ class SearchOnlineController: UIViewController {
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
         searchView.collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "searchCell")
-        
+        loadData()
     }
     
     private func loadData() {
-        
+        CardsAPIClient.getCards { (result) in
+            
+            switch result {
+            case .failure(let appError):
+                print("no data found: \(appError)")
+            case .success(let cards):
+                self.onlineCards = cards
+            }
+        }
     }
     
 }
