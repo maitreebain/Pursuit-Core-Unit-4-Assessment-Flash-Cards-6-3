@@ -11,22 +11,6 @@ import NetworkHelper
 
 
 struct CardsAPIClient {
-    /*
-
-     public static func fetchStocks() throws -> [StockPrice] {
-       guard let path = Bundle.main.path(forResource: "appleStockInfo", ofType: "json") else {
-         throw AppleServiceError.resourcePathDoesNotExist
-       }
-       guard let json = FileManager.default.contents(atPath: path) else {
-         throw AppleServiceError.contentsNotFound
-       }
-       do {
-         let stocks = try JSONDecoder().decode([StockPrice].self, from: json)
-         return stocks
-       } catch {
-         throw AppleServiceError.decodingError(error)
-       }
-     */
     public enum AppleServiceError: Error {
       case resourcePathDoesNotExist
       case contentsNotFound

@@ -60,12 +60,14 @@ class SearchCell: UICollectionViewCell {
     }
     
     @objc private func didTap(_ gesture: UITapGestureRecognizer) {
+//        guard let currentCard = currentCard else { return }
         
         if gesture.state == .began || gesture.state == .changed {
             return
         }
-        animate()
         isShowingDescript.toggle()
+        
+        animate()
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
@@ -125,6 +127,6 @@ class SearchCell: UICollectionViewCell {
     
     public func configureCell(for card: CardsInfo) {
         questionLabel.text = card.cardTitle
-        descriptionText.text = card.facts.description
+        descriptionText.text = card.facts.joined(separator: " ")
     }
 }

@@ -77,9 +77,8 @@ extension SearchOnlineController: UICollectionViewDataSource {
         
         let selectedCard = onlineCards[indexPath.row]
         
+        cell.backgroundColor = .white
         cell.configureCell(for: selectedCard)
-        
-        cell.backgroundColor = .systemPink
         
         return cell
     }

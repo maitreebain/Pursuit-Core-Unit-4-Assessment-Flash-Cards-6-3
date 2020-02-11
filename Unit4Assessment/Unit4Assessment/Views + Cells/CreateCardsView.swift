@@ -19,14 +19,14 @@ class CreateCardsView: UIView {
     
     public lazy var descripText: UITextView = {
         let descrip = UITextView()
-        descrip.text = "Enter first description here"
+        descrip.text = "Enter description here"
         descrip.backgroundColor = .red
         return descrip
     }()
 
     public lazy var secondDescripText: UITextView = {
         let descrip = UITextView()
-        descrip.text = "Enter first description here"
+        descrip.text = "Enter description here"
         descrip.backgroundColor = .blue
         return descrip
     }()
