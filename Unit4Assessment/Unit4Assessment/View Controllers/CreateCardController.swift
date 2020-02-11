@@ -45,11 +45,10 @@ class CreateCardController: UIViewController {
             present(alert, animated: true)
         }
         
-        guard let card = card else {
-            return
-        }
+        let newCard = CardsInfo(cardTitle: createCardsView.titleText.text ?? "", facts: [createCardsView.descripText.text, createCardsView.secondDescripText.text])
+        
         do {
-            try dataPersistence.createItem(card)
+            try dataPersistence.createItem(newCard)
         } catch {
             print("could not create card: \(error)")
         }

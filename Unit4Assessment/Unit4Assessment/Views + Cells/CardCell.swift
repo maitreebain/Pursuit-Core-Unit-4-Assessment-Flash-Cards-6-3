@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CardCellDelegate {
+    func didEdit(_ cardCell: CardCell, _ flashcard: CardsInfo )
+}
+
 class CardCell: UICollectionViewCell {
     
     private lazy var tapGesture: UITapGestureRecognizer = {
@@ -15,6 +19,16 @@ class CardCell: UICollectionViewCell {
         //add gesture target here
         return gesture
     }()
+    
+    public lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "ellipses.circle"), for: .normal)
+        button.addTarget(self, action: #selector(editButtonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private var delegate: CardCellDelegate!
+    private var currentCard: CardsInfo!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,4 +45,8 @@ class CardCell: UICollectionViewCell {
     }
     
     //needs a button for edit
+    @objc private func editButtonPressed(_ sender: UIButton) {
+        delegate.didEdit(self, currentCard)
+    }
+    
 }

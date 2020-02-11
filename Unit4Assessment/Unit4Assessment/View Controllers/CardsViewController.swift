@@ -18,8 +18,6 @@ class CardsViewController: UIViewController {
         view = cardsView
     }
     
-    public var cardItem: CardsInfo?
-    
     var cards = [CardsInfo]() {
         didSet {
             DispatchQueue.main.async {
@@ -67,7 +65,7 @@ extension CardsViewController: UICollectionViewDelegateFlowLayout {
 
 extension CardsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return cards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -79,6 +77,34 @@ extension CardsViewController: UICollectionViewDataSource {
     }
     
 }
+
+extension CardsViewController: CardCellDelegate {
+    func didEdit(_ cardCell: CardCell, _ flashcard: CardsInfo) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
+            self.delete(card: flashcard)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+    }
+    
+    private func delete(card: CardsInfo) {
+        guard let index = cards.firstIndex(of: card) else {
+            return
+        }
+        
+        do {
+            try dataPersistence.deleteItem(at: index)
+        }catch {
+            print("could not delete item")
+        }
+    }
+    
+    
+}
+
 
 //needs DP extension here
 extension CardsViewController: DataPersistenceDelegate {
