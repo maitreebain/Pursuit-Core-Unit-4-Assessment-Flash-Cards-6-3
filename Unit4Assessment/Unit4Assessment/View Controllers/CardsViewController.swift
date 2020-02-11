@@ -10,7 +10,7 @@ import UIKit
 import DataPersistence
 
 class CardsViewController: UIViewController {
-
+    
     private let cardsView = CardsView()
     public var dataPersistence: DataPersistence<CardsInfo>!
     
@@ -20,7 +20,9 @@ class CardsViewController: UIViewController {
     
     var cards = [CardsInfo]() {
         didSet {
-            cardsView.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.cardsView.collectionView.reloadData()
+            }
         }
     }
     
@@ -49,7 +51,7 @@ extension CardsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-      return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 }
 
