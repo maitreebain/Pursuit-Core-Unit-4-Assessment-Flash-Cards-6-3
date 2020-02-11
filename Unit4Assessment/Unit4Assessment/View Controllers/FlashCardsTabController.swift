@@ -7,24 +7,43 @@
 //
 
 import UIKit
+import DataPersistence
 
 class FlashCardsTabController: UITabBarController {
+    
+    private var dataPersistence = DataPersistence<CardsInfo>(filename: "flashcards.plist")
+    
+    private lazy var cardsController: CardsViewController = {
+       let viewcontroller = CardsViewController()
+        //data persistence
+        viewcontroller.tabBarItem = UITabBarItem(title: "Cards", image: UIImage(systemName: "rectangle.dock"), tag: 0)
+        return viewcontroller
+    }()
+    
+    private lazy var createCardController: CreateCardController = {
+       let viewcontroller = CreateCardController()
+        viewcontroller.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "square.and.pencil"), tag: 1)
+        //data persistence
+        return viewcontroller
+    }()
+    
+    private lazy var searchCardsController: SearchOnlineController = {
+       let viewcontroller = SearchOnlineController()
+        //data persistence
+        viewcontroller.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
+        return viewcontroller
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        viewControllers = [UINavigationController(rootViewController: cardsController),
+                           UINavigationController(rootViewController: createCardController),
+                           UINavigationController(rootViewController: searchCardsController)
+        ]
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
