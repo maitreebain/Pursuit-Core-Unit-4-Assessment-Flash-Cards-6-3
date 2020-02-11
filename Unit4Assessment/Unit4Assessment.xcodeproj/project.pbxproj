@@ -12,6 +12,7 @@
 		579023A123F2EE3B000AA216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 579023A023F2EE3B000AA216 /* Assets.xcassets */; };
 		579023A423F2EE3B000AA216 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579023A223F2EE3B000AA216 /* LaunchScreen.storyboard */; };
 		579023AF23F2EE3B000AA216 /* Unit4AssessmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579023AE23F2EE3B000AA216 /* Unit4AssessmentTests.swift */; };
+		8068FA7823F30FC6002C450B /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8068FA7723F30FC6002C450B /* CardCell.swift */; };
 		807C19CB23F2FC8B00C42222 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CA23F2FC8B00C42222 /* CardsViewController.swift */; };
 		807C19CD23F2FC9F00C42222 /* FlashCardsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CC23F2FC9F00C42222 /* FlashCardsTabController.swift */; };
 		807C19CF23F2FCBA00C42222 /* CreateCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CE23F2FCBA00C42222 /* CreateCardController.swift */; };
@@ -44,6 +45,7 @@
 		579023AA23F2EE3B000AA216 /* Unit4AssessmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Unit4AssessmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579023AE23F2EE3B000AA216 /* Unit4AssessmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit4AssessmentTests.swift; sourceTree = "<group>"; };
 		579023B023F2EE3B000AA216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8068FA7723F30FC6002C450B /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		807C19CA23F2FC8B00C42222 /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		807C19CC23F2FC9F00C42222 /* FlashCardsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsTabController.swift; sourceTree = "<group>"; };
 		807C19CE23F2FCBA00C42222 /* CreateCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		807C19DE23F2FF5300C42222 /* Views + Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8068FA7723F30FC6002C450B /* CardCell.swift */,
 				807C19D823F2FEFE00C42222 /* CardsView.swift */,
 				807C19DA23F2FF0D00C42222 /* CreateCardsView.swift */,
 				807C19DC23F2FF2500C42222 /* SearchOnlineView.swift */,
@@ -263,6 +266,7 @@
 				807C19CD23F2FC9F00C42222 /* FlashCardsTabController.swift in Sources */,
 				807C19E423F3001400C42222 /* CardsDataModel.swift in Sources */,
 				807C19CB23F2FC8B00C42222 /* CardsViewController.swift in Sources */,
+				8068FA7823F30FC6002C450B /* CardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,10 +10,18 @@ import UIKit
 
 class CreateCardController: UIViewController {
 
+    private let createCardsView = CreateCardsView()
+    
+    override func loadView() {
+        view = createCardsView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .yellow
+        //add bar button  items here
     }
     
+    //functions for button items here
 }
