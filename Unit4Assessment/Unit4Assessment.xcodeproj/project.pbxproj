@@ -14,6 +14,7 @@
 		579023AF23F2EE3B000AA216 /* Unit4AssessmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579023AE23F2EE3B000AA216 /* Unit4AssessmentTests.swift */; };
 		8068FA7823F30FC6002C450B /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8068FA7723F30FC6002C450B /* CardCell.swift */; };
 		8068FA7A23F3197B002C450B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8068FA7923F3197B002C450B /* SearchCell.swift */; };
+		8068FA7C23F333A4002C450B /* Cards.json in Resources */ = {isa = PBXBuildFile; fileRef = 8068FA7B23F333A4002C450B /* Cards.json */; };
 		807C19CB23F2FC8B00C42222 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CA23F2FC8B00C42222 /* CardsViewController.swift */; };
 		807C19CD23F2FC9F00C42222 /* FlashCardsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CC23F2FC9F00C42222 /* FlashCardsTabController.swift */; };
 		807C19CF23F2FCBA00C42222 /* CreateCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C19CE23F2FCBA00C42222 /* CreateCardController.swift */; };
@@ -48,6 +49,7 @@
 		579023B023F2EE3B000AA216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8068FA7723F30FC6002C450B /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		8068FA7923F3197B002C450B /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		8068FA7B23F333A4002C450B /* Cards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Cards.json; sourceTree = "<group>"; };
 		807C19CA23F2FC8B00C42222 /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		807C19CC23F2FC9F00C42222 /* FlashCardsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsTabController.swift; sourceTree = "<group>"; };
 		807C19CE23F2FCBA00C42222 /* CreateCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				807C19E323F3001400C42222 /* CardsDataModel.swift */,
+				8068FA7B23F333A4002C450B /* Cards.json */,
 				807C19E523F301B200C42222 /* CardsAPIClient.swift */,
 			);
 			path = "Network Services + model";
@@ -241,6 +244,7 @@
 			files = (
 				579023A423F2EE3B000AA216 /* LaunchScreen.storyboard in Resources */,
 				579023A123F2EE3B000AA216 /* Assets.xcassets in Resources */,
+				8068FA7C23F333A4002C450B /* Cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

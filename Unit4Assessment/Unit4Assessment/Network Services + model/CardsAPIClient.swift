@@ -9,33 +9,49 @@
 import Foundation
 import NetworkHelper
 
-struct CardsAPIClient {
-    
-    static func getCards(completion: @escaping (Result<[CardsInfo], AppError>) -> ()) {
-        let endPointURL = "https://5daf8b36f2946f001481d81c.mockapi.io/api/v2/cards"
-        
-        guard let url = URL(string: endPointURL) else {
-            completion(.failure(.badURL(endPointURL)))
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        
-        NetworkHelper.shared.performDataTask(with: request) { (result) in
-            
-            switch result {
-            case .failure(let appError):
-                completion(.failure(.networkClientError(appError)))
-            case .success(let data):
-                do {
-                    let card = try JSONDecoder().decode(CardsData.self, from: data)
-                    
-                    completion(.success(card.cards))
-                } catch {
-                    
-                }
-            }
-        }
-    }
-}
 
+struct CardsAPIClient {
+    /*
+
+     public static func fetchStocks() throws -> [StockPrice] {
+       guard let path = Bundle.main.path(forResource: "appleStockInfo", ofType: "json") else {
+         throw AppleServiceError.resourcePathDoesNotExist
+       }
+       guard let json = FileManager.default.contents(atPath: path) else {
+         throw AppleServiceError.contentsNotFound
+       }
+       do {
+         let stocks = try JSONDecoder().decode([StockPrice].self, from: json)
+         return stocks
+       } catch {
+         throw AppleServiceError.decodingError(error)
+       }
+     */
+    public enum AppleServiceError: Error {
+      case resourcePathDoesNotExist
+      case contentsNotFound
+      case decodingError(Error)
+    }
+    
+    
+    public static func getCard() throws -> [CardsInfo] {
+        guard let path = Bundle.main.path(forResource: "Cards", ofType: "json") else {
+        throw AppleServiceError.resourcePathDoesNotExist
+        }
+        
+        guard let json = FileManager.default.contents(atPath: path) else {
+            throw AppleServiceError.contentsNotFound
+        }
+        
+        do {
+            let cards = try JSONDecoder().decode(CardsData.self, from: json)
+            
+            return cards.cards
+        }catch {
+            throw AppleServiceError.decodingError(error)
+        }
+        
+        
+    }
+    
+}

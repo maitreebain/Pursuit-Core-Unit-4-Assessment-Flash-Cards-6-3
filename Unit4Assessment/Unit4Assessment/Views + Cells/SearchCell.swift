@@ -34,7 +34,6 @@ class SearchCell: UICollectionViewCell {
     
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
-        //add gesture target here
         gesture.addTarget(self, action: #selector(didTap(_:)))
         return gesture
     }()
@@ -56,14 +55,37 @@ class SearchCell: UICollectionViewCell {
     private func commonInit() {
         setUpQuestionLabelConstraints()
         setUpFavoriteButtonConstraints()
+        setUpDescriptionTextConstraints()
+        addGestureRecognizer(tapGesture)
     }
     
-    @objc private func didTap(_ sender: UITapGestureRecognizer) {
+    @objc private func didTap(_ gesture: UITapGestureRecognizer) {
         
+        if gesture.state == .began || gesture.state == .changed {
+            return
+        }
+        animate()
+        isShowingDescript.toggle()
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
         
+    }
+    
+    private func animate() {
+        let duration = 1.0
+        
+        if isShowingDescript {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
+                self.questionLabel.alpha = 1.0
+                self.descriptionText.alpha = 0.0
+            }, completion: nil)
+        }else {
+                UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
+                    self.questionLabel.alpha = 0.0
+                    self.descriptionText.alpha = 1.0
+                }, completion: nil)
+        }
     }
     
     private func setUpQuestionLabelConstraints() {
@@ -100,8 +122,9 @@ class SearchCell: UICollectionViewCell {
             descriptionText.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
-
+    
     public func configureCell(for card: CardsInfo) {
         questionLabel.text = card.cardTitle
+        descriptionText.text = card.facts.description
     }
 }

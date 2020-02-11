@@ -39,14 +39,10 @@ class SearchOnlineController: UIViewController {
     }
     
     private func loadData() {
-        CardsAPIClient.getCards { (result) in
-            
-            switch result {
-            case .failure(let appError):
-                print("no data found: \(appError)")
-            case .success(let cards):
-                self.onlineCards = cards
-            }
+        do{
+        onlineCards = try CardsAPIClient.getCard()
+        } catch {
+            print("no data found: \(error)")
         }
     }
     
