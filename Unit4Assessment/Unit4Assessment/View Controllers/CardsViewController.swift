@@ -18,6 +18,8 @@ class CardsViewController: UIViewController {
         view = cardsView
     }
     
+    public var cardItem: CardsInfo?
+    
     var cards = [CardsInfo]() {
         didSet {
             DispatchQueue.main.async {
@@ -35,6 +37,14 @@ class CardsViewController: UIViewController {
         
         //register cell here
         cardsView.collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardsCell")
+    }
+    
+    private func loadFavorites() {
+        do {
+            cards = try dataPersistence.loadItems()
+        } catch {
+            print("no items available")
+        }
     }
 }
 
@@ -68,6 +78,17 @@ extension CardsViewController: UICollectionViewDataSource {
         return cell
     }
     
-    //didselect
+}
+
+//needs DP extension here
+extension CardsViewController: DataPersistenceDelegate {
+    func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        loadFavorites()
+    }
+    
+    func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        loadFavorites()
+    }
+    
     
 }

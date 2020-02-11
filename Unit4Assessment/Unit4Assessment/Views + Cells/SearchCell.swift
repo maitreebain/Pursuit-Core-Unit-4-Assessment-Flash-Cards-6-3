@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SavedCardCellDelegate: AnyObject {
+    func didFavorite(_ searchCell: SearchCell, _ card: CardsInfo)
+}
+
 class SearchCell: UICollectionViewCell {
     
     //needs button for saving
@@ -39,6 +43,7 @@ class SearchCell: UICollectionViewCell {
     }()
     
     //MARK:// - Current card and state
+    public var delegate: SavedCardCellDelegate!
     private var currentCard: CardsInfo!
     private var isShowingDescript = false
     
@@ -71,7 +76,8 @@ class SearchCell: UICollectionViewCell {
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
-        
+        //set delegate here
+        delegate.didFavorite(self, currentCard)
     }
     
     private func animate() {

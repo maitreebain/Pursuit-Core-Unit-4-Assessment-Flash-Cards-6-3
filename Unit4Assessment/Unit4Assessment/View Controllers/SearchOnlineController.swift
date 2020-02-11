@@ -9,9 +9,7 @@
 import UIKit
 import DataPersistence
 
-//make protocol here
 class SearchOnlineController: UIViewController {
-    //needs data persistence delegate on this vc
     private let searchView = SearchOnlineView()
     public var dataPersistence: DataPersistence<CardsInfo>!
     
@@ -82,4 +80,10 @@ extension SearchOnlineController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //do data persisting here
+    }
+    
+    
 }
