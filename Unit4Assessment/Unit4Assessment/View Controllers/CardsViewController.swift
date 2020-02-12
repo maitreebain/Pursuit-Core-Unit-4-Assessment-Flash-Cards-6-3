@@ -88,9 +88,6 @@ extension CardsViewController: UICollectionViewDataSource {
 }
 
 extension CardsViewController: CellDelegate {
-    func didFavorite(_ searchCell: FlashcardCell, _ card: CardsInfo) {
-        print("nbdsfbv")
-    }
     
     func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

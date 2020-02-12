@@ -38,6 +38,8 @@ class FlashcardCell: UICollectionViewCell {
     public lazy var descriptionText: UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .red
+        tv.alpha = 0.0
+        tv.isEditable = false
         return tv
     }()
     
@@ -73,39 +75,38 @@ class FlashcardCell: UICollectionViewCell {
     
     
     @objc private func didTap(_ gesture: UITapGestureRecognizer) {
-//        guard let currentCard = currentCard else { return }
         
         if gesture.state == .began || gesture.state == .changed {
             return
         }
+        
+        let duration = 1.0
+        
         isShowingDescript.toggle()
         
-        animate()
+        if isShowingDescript {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
+                self.descriptionText.alpha = 1.0
+                self.questionLabel.alpha = 0.0
+            }, completion: nil)
+        } else {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
+                self.descriptionText.alpha = 0.0
+                self.questionLabel.alpha = 1.0
+            }, completion: nil)
+
+        }
+        
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
         if state == CellState.cardsVC{
-        delegate.didEdit(self, currentCard)
+            delegate.didEdit(self, currentCard)
         } else{
             delegate.didEdit(self, currentCard)
         }
     }
     
-    private func animate() {
-        let duration = 1.0
-        
-        if isShowingDescript {
-            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
-                self.questionLabel.alpha = 0.0
-                self.descriptionText.alpha = 1.0
-            }, completion: nil)
-        }else {
-            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
-                self.descriptionText.alpha = 0.0
-                self.questionLabel.alpha = 1.0
-            }, completion: nil)
-        }
-    }
     
     private func setUpQuestionLabelConstraints() {
         addSubview(questionLabel)
