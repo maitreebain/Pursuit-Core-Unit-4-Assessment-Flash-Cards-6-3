@@ -50,19 +50,7 @@ class SearchOnlineController: UIViewController {
     
 }
 
-extension SearchOnlineController: CellDelegate {
-    func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
-        
-        do {
-            try dataPersistence.createItem(flashcard)
-        } catch {
-            print("could not save card as favorite")
-        }
-    }
-    
-    
-    
-}
+
 
 extension SearchOnlineController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

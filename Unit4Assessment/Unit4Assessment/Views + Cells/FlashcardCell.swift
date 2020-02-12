@@ -92,13 +92,13 @@ class FlashcardCell: UICollectionViewCell {
         
         if isShowingDescript {
             UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
-                self.questionLabel.alpha = 1.0
-                self.descriptionText.alpha = 0.0
+                self.questionLabel.alpha = 0.0
+                self.descriptionText.alpha = 1.0
             }, completion: nil)
         }else {
             UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
-                self.descriptionText.alpha = 1.0
-                self.questionLabel.alpha = 0.0
+                self.descriptionText.alpha = 0.0
+                self.questionLabel.alpha = 1.0
             }, completion: nil)
         }
     }

@@ -49,10 +49,14 @@ class CreateCardController: UIViewController {
         
         do {
             try dataPersistence.createItem(newCard)
+            print("saved card")
         } catch {
             print("could not create card: \(error)")
         }
         
+        let cardsVC = CardsViewController()
+        cardsVC.dataPersistence = dataPersistence
+        navigationController?.pushViewController(cardsVC, animated: true)
     }
 }
 

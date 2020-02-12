@@ -35,6 +35,7 @@ class CardsViewController: UIViewController {
         
         //register cell here
         cardsView.collectionView.register(FlashcardCell.self, forCellWithReuseIdentifier: "cardsCell")
+        loadFavorites()
     }
     
     private func loadFavorites() {
@@ -79,6 +80,7 @@ extension CardsViewController: UICollectionViewDataSource {
         
         cell.configureCell(for: selectedItem)
         cell.state = CellState.cardsVC
+        cell.delegate = self
         return cell
     }
     
