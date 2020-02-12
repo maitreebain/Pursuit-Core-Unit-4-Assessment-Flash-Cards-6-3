@@ -35,6 +35,7 @@ class CardsViewController: UIViewController {
         
         //register cell here
         cardsView.collectionView.register(FlashcardCell.self, forCellWithReuseIdentifier: "cardsCell")
+        dataPersistence.delegate = self
         loadFavorites()
     }
     
