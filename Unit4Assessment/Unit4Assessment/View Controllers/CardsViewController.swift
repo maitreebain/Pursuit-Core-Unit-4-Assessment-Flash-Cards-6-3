@@ -97,6 +97,7 @@ extension CardsViewController: CellDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
     
     private func delete(card: CardsInfo) {
