@@ -21,7 +21,7 @@ class CreateCardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = #colorLiteral(red: 0.9198673368, green: 0.923560679, blue: 0.992310226, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(createButtonPressed(_:)))
         navigationItem.rightBarButtonItem?.isEnabled = false
         createCardsView.titleText.delegate = self

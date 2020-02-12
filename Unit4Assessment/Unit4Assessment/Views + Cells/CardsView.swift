@@ -14,7 +14,7 @@ class CardsView: UIView {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .vertical
       let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-      cv.backgroundColor = .systemGroupedBackground
+      cv.backgroundColor = #colorLiteral(red: 0.9198673368, green: 0.923560679, blue: 0.992310226, alpha: 1)
       return cv
     }()
 

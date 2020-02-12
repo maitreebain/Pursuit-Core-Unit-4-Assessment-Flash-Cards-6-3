@@ -34,8 +34,7 @@ class SearchOnlineController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        view.backgroundColor = .blue
+        view.backgroundColor = #colorLiteral(red: 0.9198673368, green: 0.923560679, blue: 0.992310226, alpha: 1)
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
         searchView.collectionView.register(FlashcardCell.self, forCellWithReuseIdentifier: "cardsCell")
