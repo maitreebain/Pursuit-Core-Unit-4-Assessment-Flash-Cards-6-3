@@ -13,7 +13,6 @@ class CreateCardController: UIViewController {
 
     private let createCardsView = CreateCardsView()
     public var dataPersistence: DataPersistence<CardsInfo>!
-    public var card: CardsInfo?
     
     override func loadView() {
         view = createCardsView
@@ -21,11 +20,10 @@ class CreateCardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .yellow
         
+        view.backgroundColor = .systemGroupedBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(createButtonPressed(_:)))
-        //delegate for text field
+        navigationItem.rightBarButtonItem?.isEnabled = false
         createCardsView.titleText.delegate = self
         createCardsView.descripText.delegate = self
         createCardsView.secondDescripText.delegate = self
@@ -38,14 +36,17 @@ class CreateCardController: UIViewController {
         
         if createCardsView.titleText.text == ""{
             present(alert, animated: true)
-            } else if createCardsView.descripText.text.isEmpty || createCardsView.descripText.text == "Enter description here" {
+            } else
+            if createCardsView.descripText.text.isEmpty {
             present(alert, animated: true)
-        } else if createCardsView.secondDescripText.text.isEmpty || createCardsView.secondDescripText.text == "Enter description here" {
+        } else if createCardsView.secondDescripText.text.isEmpty {
             present(alert, animated: true)
         }
         
         let newCard = CardsInfo(cardTitle: createCardsView.titleText.text ?? "", facts: [createCardsView.descripText.text, createCardsView.secondDescripText.text])
         
+        
+        if !newCard.cardTitle.isEmpty, !newCard.facts.isEmpty {
         do {
             try dataPersistence.createItem(newCard)
             print("saved card")
@@ -56,10 +57,12 @@ class CreateCardController: UIViewController {
         let cardsVC = CardsViewController()
         cardsVC.dataPersistence = dataPersistence
         navigationController?.pushViewController(cardsVC, animated: true)
+        }
     }
 }
 
 extension CreateCardController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
@@ -68,6 +71,8 @@ extension CreateCardController: UITextFieldDelegate {
 extension CreateCardController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        navigationItem.rightBarButtonItem?.isEnabled = true
         textView.text = ""
     }
+    
 }

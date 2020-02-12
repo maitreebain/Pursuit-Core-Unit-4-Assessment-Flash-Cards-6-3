@@ -75,7 +75,8 @@ extension CardsViewController: UICollectionViewDataSource {
             fatalError("could not downcast to CardCell")
         }
         
-        cell.backgroundColor = .blue
+        cell.backgroundColor = .white
+        cell.layer.borderWidth = 4
         
         let selectedItem = cards[indexPath.row]
         

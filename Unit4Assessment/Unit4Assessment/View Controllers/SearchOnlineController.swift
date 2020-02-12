@@ -19,6 +19,8 @@ class SearchOnlineController: UIViewController {
         view = searchView
     }
     
+    private var savedStatus = false
+    
     public var onlineCards = [CardsInfo]() {
         didSet {
             DispatchQueue.main.async {
@@ -82,6 +84,7 @@ extension SearchOnlineController: UICollectionViewDataSource {
         let selectedCard = onlineCards[indexPath.row]
         
         cell.backgroundColor = .white
+        cell.layer.borderWidth = 4
         cell.configureCell(for: selectedCard)
         cell.state = CellState.searchVC
         cell.delegate = self
@@ -94,13 +97,21 @@ extension SearchOnlineController: UICollectionViewDataSource {
 extension SearchOnlineController: CellDelegate {
     func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
         
-        do {
-            try dataPersistence.createItem(flashcard)
-            print("saved flashcard")
-        } catch {
-            print("could not save flashcard")
+        savedStatus = dataPersistence.hasItemBeenSaved(flashcard)
+        
+        if savedStatus == true {
+            let alert = UIAlertController(title: "Card already saved!", message: "Please choose another flashcard", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .cancel, handler: nil))
+            present(alert, animated: true)
+        } else {
+            do {
+                try dataPersistence.createItem(flashcard)
+                print("saved flashcard")
+            } catch {
+                print("could not save flashcard")
+            }
+            
         }
     }
-    
     
 }

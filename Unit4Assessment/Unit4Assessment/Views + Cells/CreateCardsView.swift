@@ -12,22 +12,27 @@ class CreateCardsView: UIView {
     
     public lazy var titleText: UITextField = {
         let title = UITextField()
-        title.placeholder = "Enter title here"
-        title.backgroundColor = .green
+        title.placeholder = "enter title here"
+        title.backgroundColor = .white
+        title.layer.cornerRadius = 4
         return title
     }()
     
     public lazy var descripText: UITextView = {
         let descrip = UITextView()
-        descrip.text = "Enter description here"
-        descrip.backgroundColor = .red
+        descrip.text = "enter description here"
+        descrip.font = UIFont(name: "Geeza Pro", size: 17.0)
+        descrip.backgroundColor = .white
+        descrip.layer.cornerRadius = 4
         return descrip
     }()
 
     public lazy var secondDescripText: UITextView = {
         let descrip = UITextView()
-        descrip.text = "Enter description here"
-        descrip.backgroundColor = .blue
+        descrip.text = "enter description here"
+        descrip.font = UIFont(name: "Geeza Pro", size: 17.0)
+        descrip.backgroundColor = .white
+        descrip.layer.cornerRadius = 4
         return descrip
     }()
     override init(frame: CGRect) {

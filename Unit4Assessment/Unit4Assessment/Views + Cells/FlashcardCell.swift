@@ -22,6 +22,7 @@ class FlashcardCell: UICollectionViewCell {
     public lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .orange
         button.addTarget(self, action: #selector(favoritedCard(_:)), for: .touchUpInside)
         return button
     }()
@@ -31,12 +32,14 @@ class FlashcardCell: UICollectionViewCell {
         label.text = "Question: "
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.layer.cornerRadius = 4
         return label
     }()
     
     public lazy var descriptionText: UITextView = {
         let tv = UITextView()
-        tv.backgroundColor = .red
+        tv.backgroundColor = .lightGray
+        tv.layer.cornerRadius = 4
         tv.alpha = 0.0
         tv.isEditable = false
         return tv
@@ -102,6 +105,7 @@ class FlashcardCell: UICollectionViewCell {
         if state == CellState.cardsVC{
             delegate.didEdit(self, currentCard)
         } else{
+            favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             delegate.didEdit(self, currentCard)
         }
     }
@@ -139,7 +143,7 @@ class FlashcardCell: UICollectionViewCell {
             descriptionText.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionText.leadingAnchor.constraint(equalTo: leadingAnchor),
             descriptionText.trailingAnchor.constraint(equalTo: trailingAnchor),
-            descriptionText.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
+            descriptionText.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6)
         ])
     }
     
