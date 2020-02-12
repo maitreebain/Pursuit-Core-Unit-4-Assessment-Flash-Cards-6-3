@@ -84,18 +84,23 @@ extension SearchOnlineController: UICollectionViewDataSource {
         cell.backgroundColor = .white
         cell.configureCell(for: selectedCard)
         cell.state = CellState.searchVC
+        cell.delegate = self
         
         return cell
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let card = onlineCards[indexPath.row]
+}
+
+extension SearchOnlineController: CellDelegate {
+    func didEdit(_ cardCell: FlashcardCell, _ flashcard: CardsInfo) {
         
         do {
-            try dataPersistence.createItem(card)
+            try dataPersistence.createItem(flashcard)
+            print("saved flashcard")
         } catch {
-            print("could not save card as favorite")
+            print("could not save flashcard")
         }
     }
+    
+    
 }

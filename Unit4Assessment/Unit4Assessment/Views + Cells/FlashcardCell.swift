@@ -22,7 +22,7 @@ class FlashcardCell: UICollectionViewCell {
     //needs button for saving
     public lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "ellipses.circle"), for: .normal)
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.addTarget(self, action: #selector(favoritedCard(_:)), for: .touchUpInside)
         return button
     }()
@@ -84,7 +84,11 @@ class FlashcardCell: UICollectionViewCell {
     }
     
     @objc private func favoritedCard(_ sender: UIButton) {
+        if state == CellState.cardsVC{
         delegate.didEdit(self, currentCard)
+        } else{
+            delegate.didEdit(self, currentCard)
+        }
     }
     
     private func animate() {
@@ -140,6 +144,7 @@ class FlashcardCell: UICollectionViewCell {
     }
     
     public func configureCell(for card: CardsInfo) {
+        currentCard = card
         if state == CellState.searchVC {
             favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
