@@ -19,7 +19,6 @@ protocol CellDelegate: AnyObject {
 
 class FlashcardCell: UICollectionViewCell {
     
-    //needs button for saving
     public lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)

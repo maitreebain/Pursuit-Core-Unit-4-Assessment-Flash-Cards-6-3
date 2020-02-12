@@ -31,7 +31,6 @@ class CreateCardController: UIViewController {
         createCardsView.secondDescripText.delegate = self
     }
     
-    //functions for button items here
     @objc private func createButtonPressed(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "Empty field!", message: "Please enter a title/description", preferredStyle: .alert)
@@ -67,7 +66,8 @@ extension CreateCardController: UITextFieldDelegate {
 }
 
 extension CreateCardController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        textView.resignFirstResponder()
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
     }
 }
